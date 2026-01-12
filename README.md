@@ -1,89 +1,166 @@
-# How to use
-## Create new wallet
+# CertChain - Decentralized Certificate Management System
 
-There are 2 way to create new wallet
+CertChain is a blockchain-based application for issuing, verifying, and managing digital certificates. Built on the **Solana Blockchain**, it ensures that certificates are immutable, tamper-proof, and easily verifiable.
 
-First you need to visit solana playground: [beta.solpg.io](https://beta.solpg.io/)
+## 🚀 Features
 
-Then select connect to devnet on bottom left of website
-![](backend/tutorial/01.png)
+*   **Create Certificate**: Issue new certificates with detailed metadata (Name, Birthday, Delivery Date, Serial ID, etc.).
+*   **Blockchain Storage**: Critical data is hashed and stored on the Solana Devnet for immutability.
+*   **Database Indexing**: PostgreSQL is used to index certificates for fast querying by Owner.
+*   **Verify Certificate**: Anyone can verify the authenticity of a certificate using its Public Key.
+*   **Revoke Certificate**: Owners can revoke a certificate if needed. Revoked certificates are marked on-chain and in the database.
+*   **Phantom Wallet Integration**: Seamless login and signing of transactions using Phantom Wallet.
+*   **Cross-Platform Automation**: Automated scripts for easy setup and running on both Windows and Linux.
 
-Then you can create an account direct on top right menu
-![](backend/tutorial/02.png)
+## 🛠️ Technology Stack
 
-Another way is better but not recommend for noob, you need to download Phantom extension and sign up an account. Then you can create many wallet as you want, but to use this wallet in devnet solana, you need to first connect in solana playground
-![](backend/tutorial/03.png)
+*   **Frontend**: [Next.js](https://nextjs.org/) (React, TypeScript, Tailwind CSS, Shadcn UI)
+*   **Backend**: Python ([FastAPI](https://fastapi.tiangolo.com/))
+*   **Blockchain**: [Solana](https://solana.com/) (Devnet)
+*   **Smart Contract**: [Anchor Framework](https://www.anchor-lang.com/) (Rust)
+*   **Database**: [PostgreSQL](https://www.postgresql.org/) (via Docker)
+*   **Tools**: Docker, Prisma ORM.
 
-## How to start server API
+## 📋 Prerequisites
 
-First of all you need python > 3.10 and pip
+Ensure you have the following installed:
 
-### Windows
+1.  **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**: Required for the database.
+2.  **[Node.js](https://nodejs.org/)** (v18+): For the frontend.
+3.  **[Python](https://www.python.org/)** (v3.10+): For the backend.
+4.  **[Phantom Wallet Extension](https://phantom.app/)**: For browser interaction.
+
+## 🎒 Wallet Setup (Devnet)
+
+To use the application on Devnet, you need a Solana Wallet (Phantom recommended).
+
+### 1. Using Solana Playground (Quickest)
+1.  Visit [Solana Playground](https://beta.solpg.io/).
+2.  Click **"Not connected"** (bottom left) -> Select **"Devnet"**.
+    ![Connect Devnet](tutorial/01.png)
+3.  Click the simplified profile icon (top right) -> **Create**.
+    ![Create Account](tutorial/02.png)
+
+### 2. Using Phantom Wallet (Recommended)
+1.  Install Phantom Extension.
+2.  Create a new wallet.
+3.  **Important**: You must connect to **Solana Playground** at least once or use the Faucet to fund your devnet wallet.
+    ![Phantom Setup](tutorial/03.png)
+
+## ⚙️ Installation & Setup
+
+We provide automated scripts to make installation a breeze.
+
+### 🪟 Windows
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/huynq-hust23/CertChain.git
+    cd CertChain
+    ```
+2.  **Run the Installer**:
+    Double-click `install.bat` or run in CMD:
+    ```cmd
+    install.bat
+    ```
+    *This will install Node dependencies, setup a Python virtual environment, and install Python requirements.*
+
+### 🐧 Linux (Ubuntu/Debian)
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/huynq-hust23/CertChain.git
+    cd CertChain
+    ```
+2.  **Run the Installer**:
+    ```bash
+    chmod +x install_linux.sh
+    ./install_linux.sh
+    ```
+
+## 🚀 How to Run
+
+Make sure **Docker Desktop** is running first (the script will try to start it for you).
+
+### 🪟 Windows
+
+Double-click `run.bat`.
+*   This will start the PostgreSQL Database (Docker).
+*   Start the Python Backend (in a new window).
+*   Start the Next.js Frontend.
+
+### 🐧 Linux
+
+Run:
+```bash
+chmod +x run_linux.sh
+./run_linux.sh
 ```
-./install.bat
-./run.bat
+
+App will be available at: **http://localhost:3000**
+
+### 👻 Connect Phantom Wallet
+
+1.  Open your Phantom Wallet extension.
+2.  Go to **Settings** -> **Developer Settings**.
+3.  Turn on **Testnet Mode**.
+4.  Switch network to **Solana Devnet**.
+5.  On the CertChain website, click **"Connect Wallet"** in the top right corner.
+
+## 📂 Configuration
+
+The project uses a `.env` file for configuration. A sample configuration might look like this:
+
+```env
+# Database
+POSTGRES_PRISMA_URL="postgresql://user:password@localhost:5432/certchain?schema=public"
+POSTGRES_URL_NON_POOLING="postgresql://user:password@localhost:5432/certchain?schema=public"
+
+# Solana
+NEXT_PUBLIC_SOLANA_RPC_URL="https://api.devnet.solana.com"
 ```
 
-### Linux
-```
-cd blockchain\client
+## 📜 Smart Contract
 
-python -m venv venv
-venv\Scripts\activate
+The Smart Contract is deployed on Solana Devnet.
+*   **Program ID**: `8BHVu5Yt29eDf7pkt1GE3tkBHHdDrMmfT6fpuYQTuN4F`
 
-pip install -r requirements.txt
+## 👤 Author
 
-python main.py
-```
+**Nguyen Nhat Huy**
+*   Email: [huy.nn225335@sis.hust.edu.vn](mailto:huy.nn225335@sis.hust.edu.vn)
+*   GitHub: [huynq-hust23](https://github.com/huynq-hust23)
 
-### Document API
+## 📚 Backend API Documentation
 
-When server start at port 8000 then visit [http://localhost:8000/docs](http://localhost:8000/docs) for document of API
+Once the backend is running, you can access the full interactive API documentation (Swagger UI) at:
+**[http://localhost:8000/docs](http://localhost:8000/docs)**
 
-## On-chain revoke (Devnet)
+## 💸 Fee Payer Configuration
 
-UI revoke uses Phantom to sign and send an on-chain transaction calling the Anchor instruction `revoke_certificate`.
+The fee payer account is configured in the backend. You can change it by editing:
+`backend/blockchain/client/config.py`
 
-### 1) Configure client env
+## 🔑 How to Get Private Key
 
-Copy `.env.example` to `.env` and set:
+### From Phantom Wallet
+1.  Open Phantom Wallet.
+2.  Go to **Settings** -> **Select Account**.
+3.  Click **"Show Private Key"**.
+    ![Get Private Key](tutorial/04.png)
 
-- `NEXT_PUBLIC_SOLANA_RPC_URL` (default: `https://api.devnet.solana.com`)
-- `NEXT_PUBLIC_SOLANA_PROGRAM_ID`
+### From Solana Playground
+1.  Click on the account name (top right).
+2.  Select **"Export"** to get the keypair.
+3.  Use the backend API convert function to get the private key if needed.
 
-### 2) Build/deploy/upgrade the program
+## 🔍 How to Check on Explorer
 
-The Anchor workspace is in `backend/blockchain/solana/anchor`.
+You can view transaction history and account details on the Solana Devnet Explorer:
 
-Notes:
-- This repo currently does not include Anchor CLI in your PATH. On Windows, the most reliable setup is installing Anchor in WSL2.
-- Program ID in the source is `DrLi2HqpW1KM3mDTV8u2BHC7h5vZcGJPKCnoayZ1Rtrf`. If you deploy to a different program id, update `NEXT_PUBLIC_SOLANA_PROGRAM_ID`.
+*   **Account Info**: `https://explorer.solana.com/address/{public_address}?cluster=devnet`
+*   **Transaction Info**: `https://explorer.solana.com/tx/{transaction_signature}?cluster=devnet`
 
-From WSL2 (recommended):
-
-1. Install Solana + Anchor (standard docs)
-2. `cd /mnt/d/Prj3_MMUD/certchain/backend/blockchain/solana/anchor`
-3. `anchor build`
-4. `anchor deploy` (or `anchor upgrade` if you already deployed this program id)
-
-## Account are using for fee payer
-
-you can change fee payer in `blockchain\client\config.py`
-
-## How to get private key of wallet
-
-For solana wallet you can get private key by get keypair from export function on top right menu then using convert pair function on docs api of server to get private key of account
-
-For Phantom wallet is must easier, just go to setting on extension then click to account you want to get private key, then take the private key
-
-![](backend/tutorial/04.png)
-
-## How to check on chain
-
-For check account info you can see at `https://explorer.solana.com/address/{public_address}?cluster=devnet`
-
-For check Instruction info you can see at `https://explorer.solana.com/tx/{public_address}?cluster=devnet`
-
-For example:
-- [https://explorer.solana.com/address/CqNsnnTNyCsoVrTtNdiFZegK2eJSARXrXwvyzYGBcYi2?cluster=devnet](https://explorer.solana.com/address/CqNsnnTNyCsoVrTtNdiFZegK2eJSARXrXwvyzYGBcYi2?cluster=devnet)
-- [https://explorer.solana.com/tx/2zeiZyYjhbriiGcfPNXz8YTt4qtB3X7BqE1zocxrLwpTGRgHTuqBuFb4dW2ZXNq467ptM5xWNWJTfaEv3GxwQV5J?cluster=devnet](https://explorer.solana.com/tx/2zeiZyYjhbriiGcfPNXz8YTt4qtB3X7BqE1zocxrLwpTGRgHTuqBuFb4dW2ZXNq467ptM5xWNWJTfaEv3GxwQV5J?cluster=devnet)
+### Examples
+*   [Sample Account](https://explorer.solana.com/address/CqNsnnTNyCsoVrTtNdiFZegK2eJSARXrXwvyzYGBcYi2?cluster=devnet)
+*   [Sample Transaction](https://explorer.solana.com/tx/2zeiZyYjhbriiGcfPNXz8YTt4qtB3X7BqE1zocxrLwpTGRgHTuqBuFb4dW2ZXNq467ptM5xWNWJTfaEv3GxwQV5J?cluster=devnet)
