@@ -1,0 +1,294 @@
+{
+  "address": "8BHVu5Yt29eDf7pkt1GE3tkBHHdDrMmfT6fpuYQTuN4F",
+  "metadata": {
+    "name": "compi",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "init_certificate",
+      "discriminator": [
+        154,
+        142,
+        106,
+        170,
+        224,
+        27,
+        209,
+        46
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "sender",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "writable": true
+        },
+        {
+          "name": "cert",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "sender"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  101,
+                  114,
+                  116,
+                  105,
+                  102,
+                  105,
+                  99,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "seed_8"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "seed_8",
+          "type": "u64"
+        },
+        {
+          "name": "fullname",
+          "type": {
+            "array": [
+              "u16",
+              32
+            ]
+          }
+        },
+        {
+          "name": "birthday",
+          "type": {
+            "array": [
+              "u8",
+              4
+            ]
+          }
+        },
+        {
+          "name": "delivery_date",
+          "type": {
+            "array": [
+              "u8",
+              4
+            ]
+          }
+        },
+        {
+          "name": "serial_id",
+          "type": {
+            "array": [
+              "u16",
+              64
+            ]
+          }
+        },
+        {
+          "name": "security_code",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "more_info",
+          "type": {
+            "array": [
+              "u16",
+              256
+            ]
+          }
+        },
+        {
+          "name": "original_data_sha256",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "original_image_sha256",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "revoke_certificate",
+      "discriminator": [
+        236,
+        5,
+        130,
+        119,
+        9,
+        164,
+        130,
+        122
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "cert",
+          "writable": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Certificate",
+      "discriminator": [
+        202,
+        229,
+        222,
+        220,
+        116,
+        20,
+        74,
+        67
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    }
+  ],
+  "types": [
+    {
+      "name": "Certificate",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "sender",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "fullname",
+            "type": {
+              "array": [
+                "u16",
+                32
+              ]
+            }
+          },
+          {
+            "name": "birthday",
+            "type": {
+              "array": [
+                "u8",
+                4
+              ]
+            }
+          },
+          {
+            "name": "delivery_date",
+            "type": {
+              "array": [
+                "u8",
+                4
+              ]
+            }
+          },
+          {
+            "name": "serial_id",
+            "type": {
+              "array": [
+                "u16",
+                64
+              ]
+            }
+          },
+          {
+            "name": "security_code",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "more_info",
+            "type": {
+              "array": [
+                "u16",
+                256
+              ]
+            }
+          },
+          {
+            "name": "original_data_sha256",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "original_image_sha256",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
